@@ -1,15 +1,12 @@
 chef-bind10 - Cookbook to install bind 10
 =========================================
 
-**This cookbook is currently under development and designing! Because the README is written before the feature is implemented, some points could be missing.**
-
-
 Description
 -----------
 
 This cookbook installs [bind10](http://bind10.isc.org). Bind 10 is a complete rewrite of bind 9, introducing a modular architecture, support for database back ends and many more.
 
-**Warning**: This cookbook currently does not configure bind 10. My intention is at this point to provide an easy way to install bind 10 and experiment with it. Afterwards it is planed to implement configuration support.
+**Warning**: This cookbook currently does not configure bind 10. My intention is at this point to provide an easy way to install bind 10 and experiment with it. It is planed to implement configuration support afterwards.
 
 
 Requirements
@@ -30,8 +27,8 @@ Recipes
 The following recipes are supported:
 
 * `default`: installs bind 10, determines the most suitable way (currently on compiling from source, installation from distribution package will be supported if packages are available).
-* `source`: installs bind 10 from source. The recipe uses `checkinstall` to create a deb package which all installed files. To uninstall bind10 do `dpkg -r bind10`.
-
+* `source`: installs bind 10 from source. The recipe uses `checkinstall` to create a deb package with all installed files. To uninstall bind10 do `dpkg -r bind10`.
+* `setproctitle`: installs setproctitle - optional dependency to set nicer process titles.
 
 So ``recipe[bind10::default]`` is the recommended way.
 
@@ -41,10 +38,22 @@ Attributes
 
 ### For recipe `source`
 
-* `node['bind10']['source_version']` (`1.1.0-beta`): Which version should be installed, e.g. `1.0.0` or `1.1.0`.
-* `node['bind10']['source_url']` (`nil`): Url of the source package which should be downloaded and installed. Use `nil` to generate the url from the `source_version` attribute.
-* `node['bind10']['source_sha1']`: sha1 hash (as hexdigest) of the source archive. Use `nil` to skip source validation.
-* `node['bind10']['configure_options']` (``): Additional options which are passed to `./configure` for bind10.
+* `node['bind10']['source']['version']` (`1.1.0-beta`): Which version should be installed, e.g. `1.0.0` or `1.1.0`.
+* `node['bind10']['source']['url']` (`nil`): Url of the source package which should be downloaded and installed. Use `nil` to generate the url from the `source_version` attribute.
+* `node['bind10']['source']['checksum']`: sha256 hash (as hexdigest) of the source archive. Use `nil` to skip source validation.
+* `node['bind10']['source']['configure_options']` (``): Additional options which are passed to `./configure` for bind10.
+
+### For recipe `setproctitle`
+
+Options `node['bind10']['setproctitle']['version']`, `node['bind10']['setproctitle']['url']` and `node['bind10']['setproctitle']['checksum']` like for `source` recipe. Per default version 1.1.7 is installed.
+
+
+Contributing
+------------
+
+The cookbook is developed on [github](https://github.com). To report bugs [create an issue](https://github.com/mswart/chef-bind10/issues) or open a pull request if you now what needs to be changed.
+
+Feel free to contact me (<chef@malteswart.de> or mswart on freenode) if you have detailed questions about the cookbook. I am interested in your option and use cases.
 
 
 License and Author

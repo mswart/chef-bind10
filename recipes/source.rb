@@ -19,7 +19,7 @@
 
 # install required packages / dev tools
 packages = %w(autoconf libtool pkg-config libboost-all-dev libbotan1.10-dev liblog4cplus-dev libsqlite3-dev)
-                      :seen_recipes=
+
 unless node.recipe? 'bind10::setproctitle'
   packages += %w(build-essential python3-dev checkinstall)
 end

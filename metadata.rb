@@ -1,4 +1,4 @@
-name              'bind'
+name              'bind10'
 maintainer        'Malte Swart'
 maintainer_email  'chef@malteswart.de'
 license           'Apache 2.0'
